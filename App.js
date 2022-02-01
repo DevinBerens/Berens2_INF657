@@ -3,9 +3,34 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
+
+  let myName = 'Devin';
+  let toDoList = [
+    {
+      id: 1,
+      title: 'Clean house',
+      description: 'You need to clean the house'
+    },
+    {
+      id: 2,
+      title: 'Fix car',
+      description: 'You need to fix the car'
+    },
+    {
+      id: 3,
+      title: 'Buy groceries',
+      description: 'Time to go shopping'
+    }
+  ];
+
+  let generateTask = () => {
+    let num = Math.floor(Math.random() * (toDoList.length));
+    return toDoList[num].title;
+  }
+
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text>Hi, {myName}! Your selected task is {generateTask()}</Text>
       <StatusBar style="auto" />
     </View>
   );
