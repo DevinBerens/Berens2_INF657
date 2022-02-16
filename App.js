@@ -1,36 +1,33 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import TaskData from './TaskData';
 
 export default function App() {
-
-  let myName = 'Devin';
-  let toDoList = [
-    {
-      id: 1,
-      title: 'Clean house',
-      description: 'You need to clean the house'
-    },
-    {
-      id: 2,
-      title: 'Fix car',
-      description: 'You need to fix the car'
-    },
-    {
-      id: 3,
-      title: 'Buy groceries',
-      description: 'Time to go shopping'
-    }
-  ];
+  let [taskList, setTaskList] = useState(TaskData);
 
   let generateTask = () => {
-    let num = Math.floor(Math.random() * (toDoList.length));
-    return toDoList[num].title;
+    let num = Math.floor(Math.random() * (taskList.length));
+    return taskList[num].title;
   }
 
   return (
-    <View style={styles.container}>
-      <Text>Hi, {myName}! Your selected task is {generateTask()}</Text>
+    <View style={{
+      flex: 1, flexDirection: 'column'
+    }}>
+      <Text style={{marginTop: '50px', marginLeft: '50px' }}>Hi, Devin! Your selected task is {generateTask()}</Text>
+      <View style={{
+      flex: 1,
+      flexDirection: 'row',
+      justifyContent: 'center',
+      alignContent: 'center',
+      alignItems: 'center',
+      flexWrap: 'wrap'
+    }}>
+      <View style={{height: 100, width: 100, backgroundColor: 'powderblue'}}/>
+      <View style={{height: 100, width: 100, backgroundColor: 'red', right: 30, top: 30}} />
+      <View style={{ height: 100, width: 100, backgroundColor: 'lightgreen'}} />
+      </View>
       <StatusBar style="auto" />
     </View>
   );
