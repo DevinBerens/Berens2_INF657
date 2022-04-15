@@ -1,43 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import TaskData from './TaskData';
+import Task from './app/components/Task/Task';
+import TaskCategory from './app/components/Task/TaskCategory';
+import AddTask from './app/components/Task/AddTask';
+import {DefaultTheme, NavigationContainer} from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { colors } from "./app/components/shared/config/customStyles";
+import { categoryItems } from "./app/components/Task/TaskData";
 
-export default function App() {
-  let [taskList, setTaskList] = useState(TaskData);
+const Stack = createNativeStackNavigator();
 
-  let generateTask = () => {
-    let num = Math.floor(Math.random() * (taskList.length));
-    return taskList[num].title;
-  }
+const myTheme = {
+    ...DefaultTheme,
+    colors: colors
+};
 
-  return (
-    <View style={{
-      flex: 1, flexDirection: 'column'
-    }}>
-      <Text style={{marginTop: '50px', marginLeft: '50px' }}>Hi, Devin! Your selected task is {generateTask()}</Text>
-      <View style={{
-      flex: 1,
-      flexDirection: 'row',
-      justifyContent: 'center',
-      alignContent: 'center',
-      alignItems: 'center',
-      flexWrap: 'wrap'
-    }}>
-      <View style={{height: 100, width: 100, backgroundColor: 'powderblue'}}/>
-      <View style={{height: 100, width: 100, backgroundColor: 'red', right: 30, top: 30}} />
-      <View style={{ height: 100, width: 100, backgroundColor: 'lightgreen'}} />
-      </View>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+let App = () => {
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+    let categories = localStorage.getItem('categories');
+    if (!categories) {
+        localStorage.setItem('categories', JSON.stringify(categoryItems))
+    }
+
+    return (
+        <NavigationContainer theme={myTheme}>
+            <Stack.Navigator>
+                <Stack.Screen name="Task List" component={Task}/>
+                <Stack.Screen name="Task Category" component={TaskCategory}/>
+                <Stack.Screen name="Add Task" component={AddTask} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
+
+export default App;
