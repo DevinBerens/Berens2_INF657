@@ -6,7 +6,7 @@ let TaskCategory = (props) => {
     let categories = localStorage.getItem('categories')
     categories = JSON.parse(categories);
     return (categories[props.route.params.category].map((item) => (
-        <View style={styles.wrapper}>
+        <View style={styles.wrapper} key={item.title}>
             <View style={styles.secondWrapper}>
                 <Text style={styles.title}>{item.title}</Text>
                 <Text>{item.description}</Text>
