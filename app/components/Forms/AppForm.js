@@ -1,12 +1,10 @@
-import React from 'react';
-import { Formik } from 'formik';
+import React from "react";
+import { Formik } from "formik";
 
 let AppForm = (props) => {
-    const { children } = props;
+  const { children } = props;
 
-    return (
-        <Formik {...props}>{() => <>{children}</>}</Formik>
-    );
-}
+  return <Formik {...props}>{() => <>{children}</>}</Formik>;
+};
 
 export default AppForm;
